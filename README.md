@@ -187,14 +187,14 @@ import type { MsTeamsReporterOptions } from "playwright-msteams-reporter";
 export default defineConfig({
   reporter: [
     ["list"],
-    // First define the Azure reporter
+    // First define the Azure reporter.
     [
       "@alex_neo/playwright-azure-reporter",
       <AzureReporterOptions>{
         ...
       },
     ],
-    // Then define the Microsoft Teams reporter
+    // Then define the Microsoft Teams reporter.
     [
       'playwright-msteams-reporter',
       <MsTeamsReporterOptions>{
