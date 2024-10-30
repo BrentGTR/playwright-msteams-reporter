@@ -30,7 +30,7 @@ export const processResults = async (
     return;
   }
 
-  if (options.shouldRun && !options?.shouldRun(suite)) return
+  if (options.shouldRun && !options?.shouldRun(suite)) return;
 
   // Clone the base adaptive card and table
   const adaptiveCard = structuredClone(BaseAdaptiveCard);
@@ -47,46 +47,18 @@ export const processResults = async (
     return;
   }
 
+  // Populate the table with test results
   table.rows.push(createTableRow("Type", "Total"));
-
-  table.rows.push(
-    createTableRow(
-      `${options.enableEmoji ? "✅ " : ""}Passed`,
-      totalStatus.passed,
-      { style: "good" }
-    )
-  );
+  table.rows.push(createTableRow("✅ Passed", totalStatus.passed, { style: "good" }));
   if (totalStatus.flaky) {
-    table.rows.push(
-      createTableRow(
-        `${options.enableEmoji ? "⚠️ " : ""}Flaky`,
-        totalStatus.flaky,
-        { style: "warning" }
-      )
-    );
+    table.rows.push(createTableRow("⚠️ Flaky", totalStatus.flaky, { style: "warning" }));
   }
-  table.rows.push(
-    createTableRow(
-      `${options.enableEmoji ? "❌ " : ""}Failed`,
-      totalStatus.failed,
-      { style: "attention" }
-    )
-  );
-  table.rows.push(
-    createTableRow(
-      `${options.enableEmoji ? "⏭️ " : ""}Skipped`,
-      totalStatus.skipped,
-      { style: "accent" }
-    )
-  );
-  table.rows.push(
-    createTableRow("Total tests", totalTests, {
-      isSubtle: true,
-      weight: "Bolder",
-    })
-  );
+  table.rows.push(createTableRow("❌ Failed", totalStatus.failed, { style: "attention" }));
+  table.rows.push(createTableRow("⏭️ Skipped", totalStatus.skipped, { style: "accent" }));
+  table.rows.push(createTableRow("Total tests", totalTests, { isSubtle: true, weight: "Bolder" }));
 
-  const container = {
+  // Add the table to the card
+  adaptiveCard.body.push({
     type: "Container",
     items: [
       {
@@ -103,22 +75,19 @@ export const processResults = async (
         color: getNotificationColor(totalStatus),
       },
       table,
-    ] as any[],
+    ],
     bleed: true,
     backgroundImage: {
       url: getNotificationBackground(totalStatus),
       fillMode: "RepeatHorizontally",
     },
-  };
+  });
 
   // Check if we should ping on failure
   if (!isSuccess) {
-    const mentionData = getMentions(
-      options.mentionOnFailure,
-      options.mentionOnFailureText
-    );
+    const mentionData = getMentions(options.mentionOnFailure, options.mentionOnFailureText);
     if (mentionData?.message && mentionData.mentions.length > 0) {
-      container.items.push({
+      adaptiveCard.body.push({
         type: "TextBlock",
         size: "Medium",
         text: mentionData.message,
@@ -136,19 +105,10 @@ export const processResults = async (
     }
   }
 
-  // Add the container to the body
-  adaptiveCard.body.push(container);
-
-  // Get the github actions run URL
+  // Add action buttons
   if (options.linkToResultsUrl) {
-    let linkToResultsUrl: string;
-    if (typeof options.linkToResultsUrl === "string") {
-      linkToResultsUrl = options.linkToResultsUrl;
-    } else {
-      linkToResultsUrl = options.linkToResultsUrl();
-    }
-
-    if (linkToResultsUrl && typeof linkToResultsUrl === "string") {
+    const linkToResultsUrl = typeof options.linkToResultsUrl === "string" ? options.linkToResultsUrl : options.linkToResultsUrl();
+    if (linkToResultsUrl) {
       adaptiveCard.actions.push({
         type: "Action.OpenUrl",
         title: options.linkToResultsText,
@@ -158,14 +118,8 @@ export const processResults = async (
   }
 
   if (!isSuccess && options.linkTextOnFailure && options.linkUrlOnFailure) {
-    let linkUrlOnFailure: string;
-    if (typeof options.linkUrlOnFailure === "string") {
-      linkUrlOnFailure = options.linkUrlOnFailure;
-    } else {
-      linkUrlOnFailure = options.linkUrlOnFailure();
-    }
-
-    if (linkUrlOnFailure && typeof linkUrlOnFailure === "string") {
+    const linkUrlOnFailure = typeof options.linkUrlOnFailure === "string" ? options.linkUrlOnFailure : options.linkUrlOnFailure();
+    if (linkUrlOnFailure) {
       adaptiveCard.actions.push({
         type: "Action.OpenUrl",
         title: options.linkTextOnFailure,
