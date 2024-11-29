@@ -3,6 +3,7 @@ import { TableCellStyle, TableRow } from "../models";
 export const createTableRow = (
   type: string,
   total: string | number,
+  percentage?: string,
   options?: {
     style?: TableCellStyle;
     isSubtle?: boolean;
@@ -33,6 +34,16 @@ export const createTableRow = (
           },
         ],
       },
+      {
+        type: "TableCell",
+        items: [
+          {
+            type: "TextBlock",
+            text: percentage || '',
+            wrap: true,
+          },
+        ],
+      },
     ],
   };
 
@@ -43,11 +54,13 @@ export const createTableRow = (
   if (options?.isSubtle) {
     row.cells[0].items[0].isSubtle = options?.isSubtle;
     row.cells[1].items[0].isSubtle = options?.isSubtle;
+    row.cells[2].items[0].isSubtle = options?.isSubtle;
   }
 
   if (options?.weight) {
     row.cells[0].items[0].weight = options.weight;
     row.cells[1].items[0].weight = options.weight;
+    row.cells[2].items[0].weight = options.weight;
   }
 
   return row;
