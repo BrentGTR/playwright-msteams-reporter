@@ -1,7 +1,7 @@
 {
-  "name": "playwright-msteams-messager-v2",
-  "version": "0.0.12",
-  "description": "Microsoft Teams reporter for Playwright which allows you to send notifications about the status of your E2E tests.",
+  "name": "prettier-playwright-msteams-report",
+  "version": "1.0.0",
+  "description": "A modified version of the Playwright MS Teams Messager",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
