@@ -81,6 +81,7 @@ export default defineConfig({
 ## Example Cards
 
 Here you can see an example card for failed test results:
+
 ![image](https://github.com/user-attachments/assets/447d685b-05b1-408c-9ed3-5587969c19d8)
 
 
