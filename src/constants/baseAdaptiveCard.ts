@@ -3,29 +3,7 @@ import { AdaptiveCard } from "../models";
 export const BaseAdaptiveCard = <AdaptiveCard>
 {
   "type": "AdaptiveCard",
-  "body": [
-    {
-      "type": "TextBlock",
-      "size": "Large",
-      "weight": "Bolder",
-      "text": "Test Run Report"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Status: ${status}",
-      "wrap": true,
-      "color": "Good"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Environment: ${environment}",
-      "wrap": true
-    },
-    {
-      "type": "TextBlock",
-      "text": "Duration: ${duration}",
-      "wrap": true
-    },
+  "body": [    
     {
       "type": "ColumnSet",
       "columns": [
