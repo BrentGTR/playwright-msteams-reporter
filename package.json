@@ -1,6 +1,6 @@
 {
   "name": "prettier-playwright-msteams-report",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A modified version of the Playwright MS Teams Messager",
   "main": "dist/index.js",
   "scripts": {
