@@ -3,49 +3,7 @@ import { AdaptiveCard } from "../models";
 export const BaseAdaptiveCard = <AdaptiveCard>
 {
   "type": "AdaptiveCard",
-  "body": [    
-    {
-      "type": "ColumnSet",
-      "columns": [        
-        {
-          "type": "Column",
-          "width": "auto",
-          "items": [
-            {
-              "type": "TextBlock",
-              "text": "Total",
-              "weight": "Bolder"
-            },
-            {
-              "type": "TextBlock",
-              "text": "${passed}",
-              "spacing": "Small"
-            },
-            {
-              "type": "TextBlock",
-              "text": "${failed}",
-              "spacing": "Small"
-            },
-            {
-              "type": "TextBlock",
-              "text": "${skipped}",
-              "spacing": "Small"
-            },
-            {
-              "type": "TextBlock",
-              "text": "${total}",
-              "spacing": "Small"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "TextBlock",
-      "text": "Test Name: ${testName}",
-      "wrap": true
-    }
-  ],
+  "body": [],
   "msteams": {
     "width": "Full"
   },
