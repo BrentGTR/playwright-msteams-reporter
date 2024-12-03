@@ -6,38 +6,7 @@ export const BaseAdaptiveCard = <AdaptiveCard>
   "body": [    
     {
       "type": "ColumnSet",
-      "columns": [
-        {
-          "type": "Column",
-          "width": "stretch",
-          "items": [
-            {
-              "type": "TextBlock",
-              "text": "Type",
-              "weight": "Bolder"
-            },
-            {
-              "type": "TextBlock",
-              "text": "Passed",
-              "spacing": "Small"
-            },
-            {
-              "type": "TextBlock",
-              "text": "Failed",
-              "spacing": "Small"
-            },
-            {
-              "type": "TextBlock",
-              "text": "Skipped",
-              "spacing": "Small"
-            },
-            {
-              "type": "TextBlock",
-              "text": "Total Tests",
-              "spacing": "Small"
-            }
-          ]
-        },
+      "columns": [        
         {
           "type": "Column",
           "width": "auto",
